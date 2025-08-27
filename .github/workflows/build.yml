@@ -1,0 +1,28 @@
+name: Build Extension
+
+# This action runs on every push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checks out your repository's code
+    - uses: actions/checkout@v3
+
+    # 2. Zips the contents of your repository
+    - name: Zip Release
+      uses: TheDoctor0/zip-release@master
+      with:
+        filename: 'release.zip'
+        path: '.'
+
+    # 3. Uploads the zip file as an "artifact" that you can download
+    - name: Upload Release
+      uses: actions/upload-artifact@v3
+      with:
+        name: vertext-capture-package
+        path: release.zip
