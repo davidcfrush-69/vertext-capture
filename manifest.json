@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Vertext Capture",
+  "version": "1.5",
+  "description": "Save web content as clean Markdown for your notes. Easily capture articles, selections, and bookmarks without digital clutter.",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "turndown.js",
+        "Readability.js",
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "commands": {
+    "clip-selection": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Clip the current selection"
+    }
+  }
+}
